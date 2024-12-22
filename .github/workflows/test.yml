@@ -1,0 +1,19 @@
+name: Show docker buildx issue
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Buildx docker with domain
+        run: |
+          docker buildx build --add-host host.docker.internal=host-gateway .
